@@ -1,11 +1,10 @@
 #header-div{
     width: 100%;
-    background-color: aqua;
-    height: 120px;
+    background-color: grey;
+    height: 110px;
     display: flex;
     align-content: center;
     justify-content: center;
-    position: absolute;
 }
 #container-div{
     width: 100%;
@@ -17,11 +16,24 @@
 }
 #mfb-img{
     width: 150px;
-    height: 100px;
+    height: 90px;
+    border-radius: 4px;
 }
 #header-small{
     width: 80%;
-    height: 100px;
+    height: 90px;
     display: flex;
     margin: 10px;
+}
+.href{
+   text-decoration: none;
+   color: black;
+   text-shadow: 1px 1px grey;
+   margin-top: 10px;
+}
+.logo{
+    height: 50px;
+    width: 50px;
+    margin-left: 50px;
+    margin-bottom: 5px;
 }
