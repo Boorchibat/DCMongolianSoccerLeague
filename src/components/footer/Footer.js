@@ -10,26 +10,27 @@ export const Footer = () => {
           <div id="headline">
             <div className="column">
                 <h1>League</h1>
-                <p>Home</p>
-                <p>Table</p>
-                <p>Results</p>
-                <>Clubs</>
+                <a href="/home"><p>Home</p></a>
+                <a href="/table"><p>Table</p></a>
+                <a href="/results"><p>Results</p></a>
+                <a href="/clubs"><p>Clubs</p></a>
             </div>
             <div className="column">
               <h1>Stats</h1>
-              <p>Stats page</p>
-              <p>Teams</p>
-              <p>Table</p>
+              <a href="/table"><p>Stats page</p></a>
+              <a href="/clubs"><p>Teams</p></a>
+              <a href="/table"><p>Table</p></a>
             </div>
             <div className="column">
               <h1>Contact</h1>
-              <p>FaceBook manager Contact</p>
-              <p>League administrator contact</p>
-              <p>Page Creater Contact</p>
+              <p>FaceBook manager Contact:
+              </p>
+              <p>League administrator contact:</p>
+              <p>Page Creater Contact:</p>
             </div>
             <div className="column">
                 <h1>Information </h1>
-                <p>This Website was made to give information about the league</p>
+                <p>This Website was made to give information about the league and to inform players about time and location</p>
             </div>
           </div>
         </div>

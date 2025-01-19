@@ -1,0 +1,62 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+}
+#table-div {
+  width: 80%;
+  margin: 150px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+table.scores-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+table.scores-table th,
+table.scores-table td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+table.scores-table th {
+  background-color: #4caf50;
+  color: white;
+}
+
+table.scores-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+table.scores-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+@media (max-width: 600px) {
+  table.scores-table {
+    font-size: 14px;
+  }
+
+  table.scores-table th,
+  table.scores-table td {
+    padding: 8px;
+  }
+}
