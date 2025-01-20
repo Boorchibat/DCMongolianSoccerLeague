@@ -1,5 +1,12 @@
 import { collection, getFirestore } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  signInWithEmailAndPassword,
+  signOut,
+  updateProfile,
+} from "firebase/auth";
 
   
 const firebaseConfig = {
@@ -11,6 +18,23 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_FIREBASE_APP_ID,
 };
   export const app = initializeApp(firebaseConfig);
+export const auth = getAuth(app);
+
+export const signUpFunction = (firstName, lastName, email, password) => {
+  return createUserWithEmailAndPassword(auth, email, password).then(() => {
+    return updateProfile(auth.currentUser, {
+      displayName: `${firstName} ${lastName}`,
+    });
+  });
+};
+
+export const signInFunction = (email, password) => {
+  return signInWithEmailAndPassword(auth, email, password);
+};
+
+export const signOutFunction = () => {
+  return signOut(auth);
+};
   
   
   export const database = getFirestore(app);
@@ -18,4 +42,7 @@ const firebaseConfig = {
   export const gameCollection = collection(database, "game")
   export const tableCollection = collection(database, "table")
   export const resultsCollection = collection(database, "results")
+
+
+
   

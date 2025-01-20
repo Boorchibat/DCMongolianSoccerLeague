@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Dchawks, Club, Mcc, Redhawks, Results, Table, Wolves, Dcmasters, Notfound, HomePage, Jaguars } from "./pages";
+import { Dchawks, Club, Mcc, Redhawks, Results, Table, Wolves, Dcmasters, Notfound, HomePage, Jaguars, SignIn, SignUp } from "./pages";
 
 export const App = () => {
   return (
@@ -16,6 +16,8 @@ export const App = () => {
         <Route path="/wolves" element={<Wolves/>}/>
         <Route path="/dc-masters" element={<Dcmasters/>}/>
         <Route path="/404" element={<Notfound/>}/>
+        <Route path="/Sign-in" element={<SignIn/>}/>
+        <Route path="/Sign-up" element={<SignUp/>}/>
       </Routes>
     </BrowserRouter>
   );
