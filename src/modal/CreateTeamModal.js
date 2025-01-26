@@ -32,6 +32,7 @@ export const CreateTeamModal = (props) => {
       console.log("stopped runnning");
     }
     console.log("succesful")
+    console.log(team)
   };
   
 

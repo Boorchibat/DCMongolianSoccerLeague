@@ -13,6 +13,7 @@ export const HomePage = () => {
   const handleOpenGame = () => setOpenGame(true);
   const handleCloseGame = () => setOpenGame(false);
 
+
   return (
     <div>
       <Header />
