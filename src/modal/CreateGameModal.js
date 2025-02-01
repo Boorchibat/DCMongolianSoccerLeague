@@ -1,34 +1,42 @@
 import * as React from "react";
-import { TextField, Box, CircularProgress } from "@mui/material";
+import { Box, CircularProgress, MenuItem, Select } from "@mui/material";
 import { Modal } from "./modal";
 import { Button } from "../components/button";
 import { useState } from "react";
-import { teamCollection } from "../firebase";
+import { gameCollection} from "../firebase";
 import { addDoc, serverTimestamp } from "firebase/firestore";
+import { useTeamContext } from "../context/TeamContext";
+import { uploadImage } from "../cloudinary";
 
 export const CreateGameModal = (props) => {
   const { open, handleClose } = props;
   console.log(open);
   const [team, setTeam] = useState("");
-  const [logo, setLogo] = useState();
+  const [logo, setLogo] = useState("");
   const [TeamTwo, setTeamTwo] = useState();
   const [logoTwo, setLogoTwo] = useState();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const handleGame = async (e) => {
-    if (team === "" || TeamTwo === "") {
+    if (team === "" || TeamTwo === "" || !logo || !logoTwo) {
       setError("Please enter all fields");
     } else {
       setLoading(true);
-      console.log("running");
+      const deployLink = await uploadImage(logo);
+      const deployLinkTwo = await uploadImage(logoTwo);
+      console.log(deployLink);
 
-      await addDoc(teamCollection, {
+      await addDoc(gameCollection, {
         team: team,
-        logo: logo,
+        TeamTwo: TeamTwo,
+        logo: deployLink,
+        logoTwo: deployLinkTwo,
         createdAt: serverTimestamp(),
       });
+      console.log(team)
 
       setTeam("");
+      setLogo("");
       setTeamTwo("");
       setError("");
       setLoading(false);
@@ -37,12 +45,13 @@ export const CreateGameModal = (props) => {
     }
   };
 
+  const { teams, teamsLoading } = useTeamContext();
   return (
     <Modal open={open} handleClose={handleClose}>
       <Box sx={{ display: "flex", flexDirection: "column", gap: "10px" }}>
         <h3>Create Game</h3>
 
-        {loading ? (
+        {loading || teamsLoading ? (
           <Box
             sx={{
               display: "flex",
@@ -61,35 +70,69 @@ export const CreateGameModal = (props) => {
                 gap: "10px",
               }}
             >
-              <TextField
-                placeholder="Home Team Name"
-                type="Name"
+              <Select
+                name="team"
                 value={team}
+                inputProps={{ "asria-label": "without label" }}
+                displayEmpty
                 onChange={(e) => setTeam(e.target.value)}
-              />
-              <div style={{display:"flex", gap:"10px"}}>
-                <p style={{marginBlockEnd:"0", marginBlockStart:"0"}}>Select Team Logo</p>
-              <input
-                placeholder="Team One Logo"
-                type="file"
-                value={logo}
-                onChange={(e) => setLogo(e.target.value)}
-              />
+                sx={{
+                  height: "37px",
+                  borderRadius: "8px",
+                  fontSize: "14px",
+                }}
+              >
+                <MenuItem value="">
+                  {teams.length === 0 ? "No Team..." : "Select Team"}
+                </MenuItem>
+                {teams.map((team) => (
+                  <MenuItem value={team.team} key={team.team}>
+                    {team.team}
+                  </MenuItem>
+                ))}
+              </Select>
+              <div style={{ display: "flex", gap: "10px" }}>
+                <p style={{ marginBlockEnd: "0", marginBlockStart: "0" }}>
+                  Select Team Logo
+                </p>
+                <input
+                  placeholder="Team One Logo"
+                  type="file"
+                  value={logo}
+                  onChange={(e) => setLogo(e.target.value)}
+                />
               </div>
-              <TextField
-                placeholder="Away Team Name"
-                type="Name"
+              <Select
+                name="team"
                 value={TeamTwo}
+                inputProps={{ "asria-label": "without label" }}
+                displayEmpty
                 onChange={(e) => setTeamTwo(e.target.value)}
-              />
-               <div style={{display:"flex", gap:"10px"}}>
-               <p style={{marginBlockEnd:"0", marginBlockStart:"0"}}>Select Team Logo</p>
-              <input
-                placeholder="Team One Logo"
-                type="file"
-                value={logoTwo}
-                onChange={(e) => setLogoTwo(e.target.value)}
-              />
+                sx={{
+                  height: "37px",
+                  borderRadius: "8px",
+                  fontSize: "14px",
+                }}
+              >
+                <MenuItem value="">
+                  {teams.length === 0 ? "No Team..." : "Select Team Two"}
+                </MenuItem>
+                {teams.map((team) => (
+                  <MenuItem value={team.team} key={team.team}>
+                    {team.team}
+                  </MenuItem>
+                ))}
+              </Select>
+              <div style={{ display: "flex", gap: "10px" }}>
+                <p style={{ marginBlockEnd: "0", marginBlockStart: "0" }}>
+                  Select Team Logo
+                </p>
+                <input
+                  placeholder="Team One Logo"
+                  type="file"
+                  value={logoTwo}
+                  onChange={(e) => setLogoTwo(e.target.value)}
+                />
               </div>
               <div id="blog-error">
                 <p style={{ color: "red", fontSize: "12px" }}>{error}</p>

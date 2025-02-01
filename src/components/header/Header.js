@@ -61,7 +61,8 @@ export const Header = () => {
               </h1>
             </div>
           </div>
-          <div style={{ display: "flex", gap: "50px" }}>
+          <div style={{ display: "flex"}}>
+            <div style={{ display: "flex", gap: "50px" }}>
             <a className="href" href="/">
               Home
             </a>
@@ -74,6 +75,8 @@ export const Header = () => {
             <a className="href" href="/clubs">
               Clubs
             </a>
+            </div>
+             <a className="href" style={{marginLeft:"50px"}} href="/sign-in">Sign in</a>
           </div>
         </div>
       </div>

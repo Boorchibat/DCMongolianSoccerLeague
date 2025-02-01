@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { signUpFunction } from "../../firebase";
+import "./Sign-up.css"
 
 export const SignUp = () => {
   const [firstName, setFirstName] = useState("");
@@ -38,59 +39,60 @@ export const SignUp = () => {
   };
   return (
     <div>
-      <div>
-        <input
-          id="input"
-          value={firstName}
-          onChange={(event) => setFirstName(event.target.value)}
-          required
-          name="firstName"
-          placeholder="First Name"
-        ></input>
-        <input
-          id="input"
-          name="lastName"
-          required
-          value={lastName}
-          onChange={(event) => setLastName(event.target.value)}
-          type="text"
-          placeholder="Last name"
-        ></input>
-        <input
-          id="input"
-          name="email"
-          required
-          value={email}
-          placeholder="Enter email"
-          onChange={(event) => setEmail(event.target.value)}
-        ></input>
-        <input
-          id="input"
-          name="Password"
-          value={password}
-          required
-          placeholder="Password"
-          onChange={(event) => setPassword(event.target.value)}
-        ></input>
-        <input
-          id="input"
-          name="Cfpassword"
-          value={cfpassword}
-          required
-          placeholder="Confirm password"
-          onChange={(event) => setCfpassword(event.target.value)}
-        ></input>
-        <button id="button" type="submit" onClick={handleSubmit}>
-          SIGN UP
-        </button>
-        <div id="link">
-          <p>Already have an account?</p>
-          <a id="signup" href="/sign-in">
-            Log in
-          </a>
-        </div>
-        {error && <p style={{ color: "red", fontSize: "18px" }}>{error}</p>}
+    <div id="container">
+      <h1 id="welcome">Create an account</h1>
+      <input
+        id="input"
+        value={firstName}
+        onChange={(event) => setFirstName(event.target.value)}
+        required
+        name="firstName"
+        placeholder="First Name"
+      ></input>
+      <input
+        id="input"
+        name="lastName"
+        required
+        value={lastName}
+        onChange={(event) => setLastName(event.target.value)}
+        type="text"
+        placeholder="Last name"
+      ></input>
+      <input
+        id="input"
+        name="email"
+        required
+        value={email}
+        placeholder="Enter email"
+        onChange={(event) => setEmail(event.target.value)}
+      ></input>
+      <input
+        id="input"
+        name="Password"
+        value={password}
+        required
+        placeholder="Password"
+        onChange={(event) => setPassword(event.target.value)}
+      ></input>
+      <input
+        id="input"
+        name="Cfpassword"
+        value={cfpassword}
+        required
+        placeholder="Confirm password"
+        onChange={(event) => setCfpassword(event.target.value)}
+      ></input>
+      <button id="button" type="submit" onClick={handleSubmit}>
+        SIGN UP
+      </button>
+      <div id="link">
+        <p>Already have an account?</p>
+        <a id="signup" href="/sign-in" >
+          Log in  
+        </a>
       </div>
+      {error && <p style={{color: 'red', fontSize: '18px'}}>{error}</p>}
     </div>
+  </div>
   );
 };

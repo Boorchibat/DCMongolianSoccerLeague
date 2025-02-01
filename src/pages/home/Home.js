@@ -4,6 +4,7 @@ import { Header } from "../../components/header/Header";
 import { Footer } from "../../components/footer/Footer";
 import { Button } from "../../components/button";
 import { CreateTeamModal, CreateGameModal } from "../../modal";
+import { GameCard } from "../../cards";
 
 export const HomePage = () => {
   const [openTeam, setOpenTeam] = useState(false);
@@ -31,6 +32,7 @@ export const HomePage = () => {
             <CreateTeamModal open={openTeam} handleClose={handleCloseTeam} />
             <CreateGameModal open={openGame} handleClose={handleCloseGame} />
           </div>
+          <GameCard/>
           <div style={{ marginTop: "100px" }}>
             <h1>Tournaments</h1>
             <div id="img-div">
@@ -43,6 +45,9 @@ export const HomePage = () => {
                 <img src="League photo.jpg" alt="img" />
               </div>
             </div>
+          </div>
+          <div id="gamecard">
+                <GameCard/>
           </div>
         </div>
       </div>

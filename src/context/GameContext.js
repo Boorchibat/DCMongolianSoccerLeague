@@ -16,7 +16,7 @@ export const GameContextProvider = (props) => {
         const gamePromises = CollectionSnapshot.docs.map(async (gameDoc) => {
           const gameData = gameDoc.data();
 
-          const teamRef = doc(teamCollection, gameData.teamId);
+          const teamRef = doc(teamCollection, gameData.team);
           const teamDoc = await getDoc(teamRef);
           const teamData = teamDoc.exists() ? teamDoc.data() : null;
 
@@ -43,6 +43,6 @@ export const GameContextProvider = (props) => {
   );
 };
 
-export const useBlogContext = () => {
+export const useGameContext = () => {
   return useContext(GameContext);
 };

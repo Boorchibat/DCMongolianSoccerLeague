@@ -61,7 +61,7 @@ export const CreateTeamModal = (props) => {
               }}
             >
               <TextField
-                placeholder="Teamc Name"
+                placeholder="Team Name"
                 type="Name"
                 value={team}
                 onChange={(e) => setTeam(e.target.value)}
