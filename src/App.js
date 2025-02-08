@@ -1,11 +1,11 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Dchawks, Club, Mcc, Redhawks, Results, Table, Wolves, Dcmasters, Notfound, HomePage, Jaguars, SignIn, SignUp } from "./pages";
+import { Dchawks, Club, Mcc, Redhawks, Results, Table, Wolves, Dcmasters, Notfound, Jaguars, SignIn, SignUp, Home } from "./pages";
 
 export const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<HomePage />}/>
+        <Route path="/" element={<Home />}/>
         <Route path="/results" element={<Results/>}/>
         <Route path="/table" element={<Table/>}/>
         <Route path="/clubs" element={<Club/>}/>

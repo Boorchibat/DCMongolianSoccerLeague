@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box, CircularProgress, MenuItem, Select } from "@mui/material";
+import { Box, CircularProgress, MenuItem, Select, TextField } from "@mui/material";
 import { Modal } from "./modal";
 import { Button } from "../components/button";
 import { useState } from "react";
@@ -11,8 +11,9 @@ import { uploadImage } from "../cloudinary";
 export const CreateGameModal = (props) => {
   const { open, handleClose } = props;
   console.log(open);
-  const [team, setTeam] = useState("");
-  const [logo, setLogo] = useState("");
+  const [team, setTeam] = useState();
+  const [logo, setLogo] = useState();
+  const [address, setAddress] = useState("");
   const [TeamTwo, setTeamTwo] = useState();
   const [logoTwo, setLogoTwo] = useState();
   const [error, setError] = useState("");
@@ -31,6 +32,7 @@ export const CreateGameModal = (props) => {
         TeamTwo: TeamTwo,
         logo: deployLink,
         logoTwo: deployLinkTwo,
+        address: address,
         createdAt: serverTimestamp(),
       });
       console.log(team)
@@ -71,7 +73,6 @@ export const CreateGameModal = (props) => {
               }}
             >
               <Select
-                name="team"
                 value={team}
                 inputProps={{ "asria-label": "without label" }}
                 displayEmpty
@@ -134,6 +135,12 @@ export const CreateGameModal = (props) => {
                   onChange={(e) => setLogoTwo(e.target.value)}
                 />
               </div>
+                <TextField
+                              placeholder="Address"
+                              type="text"
+                              value={address}
+                              onChange={(e) => setAddress(e.target.value)}
+                            />
               <div id="blog-error">
                 <p style={{ color: "red", fontSize: "12px" }}>{error}</p>
               </div>

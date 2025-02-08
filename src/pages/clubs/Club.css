@@ -1,0 +1,13 @@
+.clubs{
+    background-color: gray;
+    width: 300px;
+    height: 200px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+}
+.image{
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+}

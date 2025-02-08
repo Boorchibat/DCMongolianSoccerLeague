@@ -3,21 +3,43 @@ import "./Home.css";
 import { Header } from "../../components/header/Header";
 import { Footer } from "../../components/footer/Footer";
 import { Button } from "../../components/button";
-import { CreateTeamModal, CreateGameModal } from "../../modal";
+import { CreateTeamModal, CreateGameModal, FinishGameModal } from "../../modal";
 import { GameCard } from "../../cards";
+import { useGameContext } from "../../context/GameContext";
 
-export const HomePage = () => {
+export const Home = () => {
   const [openTeam, setOpenTeam] = useState(false);
+  const [selectedGameId, setSelectedGameId] = useState(""); // Game ID state
   const handleOpenTeam = () => setOpenTeam(true);
   const handleCloseTeam = () => setOpenTeam(false);
   const [openGame, setOpenGame] = useState(false);
   const handleOpenGame = () => setOpenGame(true);
   const handleCloseGame = () => setOpenGame(false);
+  const [openFinishModal, setOpenFinishModal] = useState(false);
 
+  const handleOpenFinishGame = (gameId) => { 
+    setSelectedGameId(gameId);  
+    setOpenFinishModal(true);  
+  };
+
+  const handleCloseFinishGame = () => {
+    setOpenFinishModal(false);
+    setSelectedGameId(null); 
+  };
+
+  const { games, gamesLoading } = useGameContext();
+  const allGames = [{ name: "All", games: "" }, ...games];
+
+  if (gamesLoading) {
+    return (
+      <div style={{display:"flex", justifyContent:"center", alignContent:"center"}}>Loading games...</div>
+    );
+  }
 
   return (
     <div>
       <Header />
+      
       <div style={{ display: "flex", justifyContent: "center" }}>
         <div id="home-div">
           <h1>League games</h1>
@@ -32,7 +54,28 @@ export const HomePage = () => {
             <CreateTeamModal open={openTeam} handleClose={handleCloseTeam} />
             <CreateGameModal open={openGame} handleClose={handleCloseGame} />
           </div>
-          <GameCard/>
+          {allGames.slice(1).map((game, index) => (
+            <div
+              key={index}
+              style={{
+                color: selectedGameId === game.gameId ? "#D4A373" : "#495057",  // Highlight selected game
+                cursor: "pointer",
+                fontWeight: "bold",
+                fontSize: 14,
+              }}
+              onClick={() => handleOpenFinishGame(game.gameId)}  // Pass the gameId
+            >
+              <GameCard games={game} />
+            </div>
+          ))}
+          <div>
+            <FinishGameModal
+              open={openFinishModal}
+              handleClose={handleCloseFinishGame}
+              gameId={selectedGameId}  // Pass the selectedGameId to the modal
+            />
+          </div>
+
           <div style={{ marginTop: "100px" }}>
             <h1>Tournaments</h1>
             <div id="img-div">
@@ -45,9 +88,6 @@ export const HomePage = () => {
                 <img src="League photo.jpg" alt="img" />
               </div>
             </div>
-          </div>
-          <div id="gamecard">
-                <GameCard/>
           </div>
         </div>
       </div>
