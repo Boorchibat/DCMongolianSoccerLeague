@@ -1,15 +1,109 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Table.css";
 import { Header } from "../../components/header/Header";
 import { Footer } from "../../components/footer/Footer";
+import { Button } from "../../components/button";
 
 export const Table = () => {
+  const loadSavedData = () => {
+    const savedData = localStorage.getItem("tableData");
+    return savedData
+      ? JSON.parse(savedData)
+      : [
+          {
+            place: "1st",
+            club: "",
+            wins: "",
+            draws: "",
+            losses: "",
+            ga: "",
+            gf: "",
+            points: "",
+          },
+          {
+            place: "2nd",
+            club: "",
+            wins: "",
+            draws: "",
+            losses: "",
+            ga: "",
+            gf: "",
+            points: "",
+          },
+          {
+            place: "3rd",
+            club: "",
+            wins: "",
+            draws: "",
+            losses: "",
+            ga: "",
+            gf: "",
+            points: "",
+          },
+          {
+            place: "4th",
+            club: "",
+            wins: "",
+            draws: "",
+            losses: "",
+            ga: "",
+            gf: "",
+            points: "",
+          },
+          {
+            place: "5th",
+            club: "",
+            wins: "",
+            draws: "",
+            losses: "",
+            ga: "",
+            gf: "",
+            points: "",
+          },
+          {
+            place: "6th",
+            club: "",
+            wins: "",
+            draws: "",
+            losses: "",
+            ga: "",
+            gf: "",
+            points: "",
+          },
+        ];
+  };
+
+  const [tableData, setTableData] = useState(loadSavedData);
+
+  const handleInputChange = (e, rowIndex, columnName) => {
+    const updatedData = [...tableData];
+    let value =
+      columnName === "wins" ||
+      columnName === "ga" ||
+      columnName === "gf" ||
+      columnName === "points"
+        ? parseFloat(e.target.value) || 0
+        : e.target.value;
+
+    if (value < 0) {
+      value = 0;
+    }
+
+    updatedData[rowIndex][columnName] = value;
+    setTableData(updatedData);
+  };
+
+
+  const handleSaveData = () => {
+    localStorage.setItem("tableData", JSON.stringify(tableData));
+  };
+
   return (
     <div>
       <Header />
       <div id="table-div">
         <div>
-          <table class="scores-table">
+          <table className="scores-table">
             <thead>
               <tr>
                 <th>Place</th>
@@ -23,68 +117,73 @@ export const Table = () => {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>1st</td>
-                <td>Team A</td>
-                <td>3 - 1</td>
-                <td>Team B</td>
-                <td>Team A Wins</td>
-                <td>3 - 1</td>
-                <td>Team B</td>
-                <td>Team A Wins</td>
-              </tr>
-              <tr>
-                <td>2nd</td>
-                <td>Team C</td>
-                <td>2 - 2</td>
-                <td>Team D</td>
-                <td>Draw</td>
-                <td>3 - 1</td>
-                <td>Team B</td>
-                <td>Team A Wins</td>
-              </tr>
-              <tr>
-                <td>3rd</td>
-                <td>Team E</td>
-                <td>4 - 0</td>
-                <td>Team F</td>
-                <td>Team E Wins</td>
-                <td>3 - 1</td>
-                <td>Team B</td>
-                <td>Team A Wins</td>
-              </tr>
-              <tr>
-                <td>4th</td>
-                <td>Team E</td>
-                <td>4 - 0</td>
-                <td>Team F</td>
-                <td>Team E Wins</td>
-                <td>3 - 1</td>
-                <td>Team B</td>
-                <td>Team A Wins</td>
-              </tr>
-              <tr>
-                <td>5th</td>
-                <td>Team E</td>
-                <td>4 - 0</td>
-                <td>Team F</td>
-                <td>Team E Wins</td>
-                <td>3 - 1</td>
-                <td>Team B</td>
-                <td>Team A Wins</td>
-              </tr>
-              <tr>
-                <td>6th</td>
-                <td>Team E</td>
-                <td>4 - 0</td>
-                <td>Team F</td>
-                <td>Team E Wins</td>
-                <td>3 - 1</td>
-                <td>Team B</td>
-                <td>Team A Wins</td>
-              </tr>
+              {tableData.map((row, rowIndex) => (
+                <tr key={rowIndex}>
+                  <td>{row.place}</td>
+                  <td>
+                    <input
+                      type="text"
+                      value={row.club}
+                      onChange={(e) => handleInputChange(e, rowIndex, "club")}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="number"
+                      value={row.wins}
+                      onChange={(e) => handleInputChange(e, rowIndex, "wins")}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="number"
+                      value={row.draws}
+                      onChange={(e) => handleInputChange(e, rowIndex, "draws")}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="number"
+                      value={row.losses}
+                      onChange={(e) => handleInputChange(e, rowIndex, "losses")}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="number"
+                      value={row.ga}
+                      onChange={(e) => handleInputChange(e, rowIndex, "ga")}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="number"
+                      value={row.gf}
+                      onChange={(e) => handleInputChange(e, rowIndex, "gf")}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="number"
+                      value={row.points}
+                      onChange={(e) => handleInputChange(e, rowIndex, "points")}
+                    />
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
+        </div>
+        <div
+          style={{
+            marginTop: "20px",
+            textAlign: "center",
+            gap: "50px",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <Button onClick={handleSaveData}>Save Data</Button>
         </div>
       </div>
       <Footer />

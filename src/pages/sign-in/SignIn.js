@@ -42,6 +42,7 @@ export const SignIn = () => {
             required
             name="Password"
             placeholder="Password"
+            type="password"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
           ></input>

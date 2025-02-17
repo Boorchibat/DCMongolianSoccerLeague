@@ -1,0 +1,54 @@
+#Error-container{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-self: center;
+}
+#error-container{
+    width: 642px;
+    display: flex;
+    align-content: center;
+    margin: 50px;
+}
+#four{
+font-size: 30px;
+margin-top: 30px;
+width: 200px;
+height: 208px;
+border-right: 5px;
+border-width: 1px;
+border-color:  #E8E8EA ;
+border-style: solid;
+border-top: 0;
+border-bottom: 0;
+border-left: 0;
+}
+#error-writing{
+width: 392px;
+height: 188px;
+font-size: 20px;
+margin-top: 20px;
+margin-left: 40px;
+padding: 0;
+display:flex;
+justify-content:center;
+flex-direction: column;
+
+}
+#p{
+    color: grey;
+}
+#error-button{
+    width: 130px;
+height: 40px;
+padding: 1px 8px 8px;
+gap: 0px;
+border-radius: 6px;
+opacity: 0px;
+background-color: #4B6BFB;
+color: white;
+border-color: transparent;
+font-size: 8px;
+text-align: center;
+
+}

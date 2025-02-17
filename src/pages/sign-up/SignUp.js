@@ -69,6 +69,7 @@ export const SignUp = () => {
       <input
         id="input"
         name="Password"
+        type="password"
         value={password}
         required
         placeholder="Password"
@@ -76,6 +77,7 @@ export const SignUp = () => {
       ></input>
       <input
         id="input"
+        type="password"
         name="Cfpassword"
         value={cfpassword}
         required

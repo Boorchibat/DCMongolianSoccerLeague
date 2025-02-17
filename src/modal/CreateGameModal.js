@@ -1,9 +1,15 @@
 import * as React from "react";
-import { Box, CircularProgress, MenuItem, Select, TextField } from "@mui/material";
+import {
+  Box,
+  CircularProgress,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
 import { Modal } from "./modal";
 import { Button } from "../components/button";
 import { useState } from "react";
-import { gameCollection} from "../firebase";
+import { gameCollection } from "../firebase";
 import { addDoc, serverTimestamp } from "firebase/firestore";
 import { useTeamContext } from "../context/TeamContext";
 import { uploadImage } from "../cloudinary";
@@ -35,9 +41,10 @@ export const CreateGameModal = (props) => {
         address: address,
         createdAt: serverTimestamp(),
       });
-      console.log(team)
+      console.log(team);
 
       setTeam("");
+      setAddress("");
       setLogo("");
       setTeamTwo("");
       setError("");
@@ -99,8 +106,7 @@ export const CreateGameModal = (props) => {
                 <input
                   placeholder="Team One Logo"
                   type="file"
-                  value={logo}
-                  onChange={(e) => setLogo(e.target.value)}
+                  onChange={(e) => setLogo(e.target.files[0])}
                 />
               </div>
               <Select
@@ -129,18 +135,17 @@ export const CreateGameModal = (props) => {
                   Select Team Logo
                 </p>
                 <input
-                  placeholder="Team One Logo"
+                  placeholder="Team Two Logo"
                   type="file"
-                  value={logoTwo}
-                  onChange={(e) => setLogoTwo(e.target.value)}
+                  onChange={(e) => setLogoTwo(e.target.files[0])}
                 />
               </div>
-                <TextField
-                              placeholder="Address"
-                              type="text"
-                              value={address}
-                              onChange={(e) => setAddress(e.target.value)}
-                            />
+              <TextField
+                placeholder="Address and Time"
+                type="text"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+              />
               <div id="blog-error">
                 <p style={{ color: "red", fontSize: "12px" }}>{error}</p>
               </div>

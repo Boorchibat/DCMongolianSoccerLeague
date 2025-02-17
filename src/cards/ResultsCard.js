@@ -1,8 +1,6 @@
 import React from "react";
 
-export const GameCard = (props) => {
-  const { games } = props;
-
+export const ResultsCard = ({ singleResult }) => {
   return (
     <div
       style={{
@@ -14,15 +12,16 @@ export const GameCard = (props) => {
     >
       <div
         style={{
-          backgroundColor: "white",
+          backgroundColor: "grey",
           width: "80%",
           justifyContent: "center",
           alignContent: "center",
           borderRadius: "5px",
           marginTop: "50px",
+          marginBottom: "50px",
         }}
       >
-        {games ? (
+        {singleResult ? (
           <div
             style={{
               display: "flex",
@@ -34,20 +33,27 @@ export const GameCard = (props) => {
           >
             <div style={{ display: "flex", gap: "50px" }}>
               <img
-                style={{ height: "75px", width: "75px", marginTop:"10px" }}
-                src={games.logo}
-                alt="hey"
+                style={{ height: "75px", width: "75px", marginTop: "25px" }}
+                src={singleResult.logo}
+                alt="team 1"
               />
-              <p> {games.team ? games.team : "No teams"}</p>
+              <p style={{marginTop:"45px"}}>{singleResult.team ? singleResult.team : "No teams"}</p>
+            </div>
+            <div style={{ display: "flex", gap:"50px" }}>
+              <h1>{singleResult.scoreTeamOne}</h1>
+              <div style={{marginTop:"20px"}}>
+                <p>vs</p>
+              </div>
+
+              <h1>{singleResult.scoreTeamTwo}</h1>
             </div>
 
-            <p>vs </p>
             <div style={{ display: "flex", gap: "50px" }}>
-              <p> {games.TeamTwo ? games.TeamTwo : "No teams"}</p>
+              <p style={{marginTop:"45px"}}>{singleResult.TeamTwo ? singleResult.TeamTwo : "No teams"}</p>
               <img
-                style={{ height: "75px", width: "75px", marginTop:"10px" }}
-                src={games.logoTwo}
-                alt="img"
+                style={{ height: "75px", width: "75px", marginTop: "25px" }}
+                src={singleResult.logoTwo}
+                alt="team 2"
               />
             </div>
           </div>
@@ -55,7 +61,7 @@ export const GameCard = (props) => {
           <p>No games available.</p>
         )}
         <div style={{ display: "flex", justifyContent: "center", fontSize:"20px" }}>
-          At {games.address ? games.address : "No Location added"}
+          At {singleResult.address ? singleResult.address : "No Location added"}
         </div>
       </div>
     </div>
