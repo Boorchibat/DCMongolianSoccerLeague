@@ -6,20 +6,18 @@ import { ResultsCard } from "../../cards/ResultsCard";
 import { DeleteResultModal } from "../../modal/DeleteResultModal";
 
 export const Results = () => {
-  const { results, resultsLoading } = useResultsGameContext(); // Destructure results and loading state from context
+  const { results, resultsLoading } = useResultsGameContext(); 
   const [openDelete, setOpenDelete] = useState(false);
   const [selectedResultId, setSelectedResultId] = useState(null);
 
-  // Ensure results are not undefined or null
   const singleResults = results || [];
 
-  // Handle opening the delete modal
   const handleOpenDelete = (resultId) => {
     setSelectedResultId(resultId);
     setOpenDelete(true);
   };
 
-  // Handle closing the delete modal
+
   const handleCloseDelete = () => {
     setOpenDelete(false);
     setSelectedResultId(null);
@@ -47,7 +45,7 @@ export const Results = () => {
               fontWeight: "bold",
               fontSize: 14,
             }}
-            onClick={() => handleOpenDelete(item.resultId)} // Ensure you're passing the correct ID
+            onClick={() => handleOpenDelete(item.resultId)} 
           >
             <ResultsCard singleResult={item} />
           </div>

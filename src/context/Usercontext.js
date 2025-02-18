@@ -31,6 +31,14 @@ export const UserContextProvider = (props) => {
   );
 };
 
+const signOut = async () => {
+  try {
+    await firebaseSignOut(auth);
+  } catch (error) {
+    console.error("Error signing out: ", error);
+  }
+};
+
 export const useUserContext = () => {
   return useContext(UserContext);
 };
